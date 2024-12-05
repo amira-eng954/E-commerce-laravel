@@ -1,0 +1,30 @@
+body{
+    background-color: #f4f4f4;
+}
+.table tr th{
+    background-color: #333 !important;
+    color: #fff !important;
+}
+h1{
+    color:#333 !important;
+    margin-top: 20px ;
+    font-size: 40px !important;
+    font-weight: bold !important;
+    text-align: center;
+    margin-bottom: 20px !important;
+}
+.list-user li{
+    padding: 10px;
+    margin-bottom: 5px;  
+}
+.list-user span{
+    width: 70px;
+}
+.list-user li:nth-child(odd){
+    background-color: #a7a2a2;
+}
+.product5{
+    margin-top: 120px;
+}
+
+

@@ -13,7 +13,7 @@ class ProductController extends Controller
     //
     public function all ()
     {
-      $data=Product::all();
+      $data=Product::paginate(5);
       return view('admin.products.product',['data'=>$data]);
 
     }

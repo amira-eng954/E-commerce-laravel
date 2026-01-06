@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('qun');
             $table->integer('price');
             $table->string('image');
+            $table->foreignId('cat_id')->nullable()->constrained() ->onUpdate('cascade');
+             $table->foreignId('user_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             
             $table->timestamps();
         });

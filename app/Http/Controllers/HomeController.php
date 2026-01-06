@@ -14,10 +14,10 @@ class HomeController extends Controller
         {
           $cats=Cat::all();
           $products=Product::all();
-          $data=User::all();
+          $users=User::all();
         //var_dump($data);
         
-          return view('admin.all',['users'=>$data,'cats'=>$cats,'products'=>$products]);
+          return view('admin.all',compact("cats","products","users"));
     
         }
 

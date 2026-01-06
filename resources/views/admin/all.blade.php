@@ -64,7 +64,7 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{url('users')}}">members</a>
-                                    <a class="nav-link" href="{{url('user/create')}}">Add-new-member</a>
+                                    <a class="nav-link" href="{{route('users.create')}}">Add-new-member</a>
                                 </nav>
                             </div>
 
@@ -76,8 +76,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{url('product')}}">All-product</a>
-                                    <a class="nav-link" href="{{url('pro/create')}}">Add-new-product</a>
+                                <a class="nav-link" href="{{route('product.index')}}">All-product</a>
+                                    <a class="nav-link" href="{{route('product.create')}}">Add-new-product</a>
                                 </nav>
                             </div>
 
@@ -90,7 +90,7 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{url('cats')}}">All-Categories</a>
-                                    <a class="nav-link" href="{{url('cat/create')}}">Add-new-categories</a>
+                                    <a class="nav-link" href="{{route('cats.create')}}">Add-new-categories</a>
                                 </nav>
                             </div>
 

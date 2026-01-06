@@ -29,7 +29,7 @@
           $xx=0;
           $total=0
         ?>
-        @foreach($data as $datas)
+        @foreach($data->cart as $datas)
        <?php
          $ss=$datas->product->image;
          

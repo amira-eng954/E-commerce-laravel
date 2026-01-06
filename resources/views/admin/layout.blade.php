@@ -45,5 +45,10 @@
 
     @yield('js')
      <script src="{{asset('pro/js/bootstrap.bundle.min.js')}}"></script>
+     <script>
+      const userID="{{Auth::id()}}";
+      </script>
+   @vite('resources/js/app.js')
+
 </body>
 </html> 

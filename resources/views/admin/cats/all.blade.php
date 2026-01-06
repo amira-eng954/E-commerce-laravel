@@ -16,23 +16,27 @@
         <th> Control</th>
       </tr>
      
-      @foreach($data as $d)
+      @foreach($cats as $cat)
 
         <tr>
-            <td>{{$d->id}}</td>
-            <td>{{$d->namecat}}</td>
-            <td>{{$d->body}}</td>
-            <td>{{$d->order}}</td>
+            <td>{{$cat->id}}</td>
+            <td>{{$cat->namecat}}</td>
+            <td>{{$cat->body}}</td>
+            <td>{{$cat->order}}</td>
             <td>
-                <a href="{{url("cats/$d->id")}}" class=' btn btn-success'>show</a>
-                <a href="{{url("cats/edit/$d->id")}}" class=' btn btn-info'>edit</a>
-                <a href="{{url("cats/delete/$d->id")}}" class=' btn btn-danger'>delete</a>
+                <a href= "{{route('cats.show',$cat->id)}}"class=' btn btn-success'>show</a>
+                <a href="{{route('cats.edit',$cat->id)}}"class=' btn btn-info'>edit</a>
+               <form action="{{route('cats.destroy',$cat->id)}}" method="post">
+                @csrf
+                @method('DELETE')
+                <button  class=' btn btn-danger'>delete</button>
+               </form>
             </td>
         </tr>
       @endforeach
 
     </table>
-    <a href="{{url('cat/create')}}" class=' btn btn-info'>add Category</a>
+    <a href="{{route('cats.create')}}" class=' btn btn-info'>add Category</a>
 
   </div>
 

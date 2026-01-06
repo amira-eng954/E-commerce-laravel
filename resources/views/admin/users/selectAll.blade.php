@@ -19,28 +19,28 @@
    </tr>
 
 
-@foreach($data as $ss)
+@foreach($users as $user)
 <tr>
-  <td>{{$ss->id}}</td>
- <td> {{$ss->name}}</td>
- <td> {{$ss->email}}</td>
+  <td>{{$user->id}}</td>
+ <td> {{$user->name}}</td>
+ <td> {{$user->email}}</td>
  <td>
-   <a href="{{url("users/$ss->id")}}" class=' btn btn-success'>show</a>
-   <a href="{{url("users/edit/$ss->id")}}" class=' btn btn-info'>edit</a>
-   <a href="{{url("users/delete/$ss->id")}}" class=' btn btn-danger'>delete</a>
+   <a href="{{route('users.show',$user->id)}}" class=' btn btn-success'>show</a>
+   <a href="{{route('users.edit',$user->id)}}" class=' btn btn-info'>edit</a>
+   
 
 
-   <!-- <form action="{{url("users/delete/$ss->id")}}" method='post'>
+    <form action="{{route('users.destroy',$user->id)}}" method='post'>
        @csrf
        @method('delete')
        
-      <input type='submit'class=' btn btn-danger d-inline' value="delete"> 
-   </form> -->
+      <input type='submit' class=' btn btn-danger d-inline' value="delete"> 
+   </form> 
    
 </td>
 </tr>
 @endforeach
 </table>
-<a href="{{url("user/create")}}" class=" btn btn-primary">add new member</a>
+<a href="{{route('users.create')}}" class=" btn btn-primary">add new member</a>
 </div>
 @endsection

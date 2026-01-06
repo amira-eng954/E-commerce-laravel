@@ -1,18 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    function all()
+    function index()
     {
-        $data=User::all();
-        //var_dump($data);
-        return view('admin.users.selectAll',["data"=>$data]);
+        $users=User::paginate(5);
+        return view('admin.users.selectAll',compact("users"));
     }
-    function select($id)
+    function show($id)
     {
         $data=User::find($id);
         //var_dump($data);
@@ -24,48 +25,32 @@ class UserController extends Controller
         return view('admin.users.add');
      }
 
-     function store(Request $request)
+     function store(UserRequest $request)
      {
-        $data=$request->validate([
-            'name'=>"required|string",
-            'email'=>"required|string",
-            'password'=>"required|string"
-
-        ]);
-
-       User::create($data);
+       User::create($request->validated());
        session()->flash("suc","member added suc");
       return  redirect(url('users'));
      }
 
+
      function edit($id)
      {
         $data=User::find($id);
-        return  view('admin.users.edit',['data'=>$data]);
+        return  view('admin.users.edit',compact("data"));
      }
 
-     function update($id,Request $request)
+     function update($id,UserRequest $request)
      {
-        $data=User::find($id);
-        $request->validate([
-            "name"=>"required|string",
-            "email"=>"required|string",
-            "password"=>"required|string",
-        ]);
-        $data->update([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>$request->password,
-
-        ]);
+        $user=User::find($id);
+        $user->update($request->validated());
         session()->flash("suc","member updatesd suc");
        return redirect(url('users'));
 
      }
-     function delete($id)
+
+     function destroy($id)
      {
-        $data=User::find($id);
-        $data->delete();
+        $data=User::find($id)->delete();
         session()->flash("suc","member deleted suc");
         return  redirect(url('users'));
      }

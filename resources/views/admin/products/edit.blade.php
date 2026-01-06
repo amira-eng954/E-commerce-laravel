@@ -9,7 +9,7 @@
   @endforeach
   @endif
 
-<form  action='{{url("product/$data->id")}}' method="post" enctype="multipart/form-data">
+<form  action="{{ route('product.update',$data->id)}}" method="post" enctype="multipart/form-data">
     @csrf
    @method('put')
     <div class=' row class=" text-center "'>

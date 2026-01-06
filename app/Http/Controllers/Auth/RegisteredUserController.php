@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Laravel\Socialite\Socialite;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -47,4 +47,26 @@ class RegisteredUserController extends Controller
 
         return redirect(route('dashboard', absolute: false));
     }
+
+    // public function redirect($provider)
+    // {
+    //      return Socialite::driver($provider)->redirect();
+    // }
+
+    //  public function redirect($provider)
+    // {
+    //     $user=Socialite::driver($provider)->user();
+    //     dd($user);
+    // }
+    public function redirect($provider)
+{
+    return Socialite::driver($provider)->redirect();//$provider= google or facebook
+}
+
+public function callback($provider)
+{
+    $user = Socialite::driver($provider)->user();
+    dd($user);
+
+}
 }

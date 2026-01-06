@@ -24,35 +24,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
 // admin control users , product , catorries, oreders update
 Route::middleware('auth','admin')->group(function () {
 Route::get("/admin",[HomeController::class,'all'])->name('admin');
-Route::get("/product",[ProductController::class,'all']);//->name('admin');
-Route::get("/product/{id}",[ProductController::class,'show']);//->name('admin');
-Route::post("/product",[ProductController::class,'store']);//->name('admin');
-Route::get("/pro/create",[ProductController::class,'create']);//->name('admin');
-Route::get("/product/edit/{id}",[ProductController::class,'edit']);//->name('admin');
-Route::put("/product/{id}",[ProductController::class,'update']);//->name('admin');
-Route::get("/product/delete/{id}",[ProductController::class,'delete']);//->name('admin');
-
 Route::get("/bootstrap",[HomeController::class,'black']);//->name('admin');
 
-
-Route::get('cats',[CatController::class,'all']);
-Route::get('cats/{id}',[CatController::class,'select']);
-Route::get('cat/create',[CatController::class,'create']);
-Route::post('cats',[CatController::class,'store']);
-Route::get('cats/edit/{id}',[CatController::class,'edit']);
-Route::put('cats/{id}',[CatController::class,'update']);
-Route::get('cats/delete/{id}',[CatController::class,'delete']);
-
-Route::get('users',[UserController::class,'all']);
-Route::get('users/{id}',[UserController::class,'select']);
-Route::get('user/create',[UserController::class,'create']);
-Route::post('users',[UserController::class,'store']);
-Route::get('users/edit/{id}',[UserController::class,'edit']);
-Route::put('users/{id}',[UserController::class,'update']);
-Route::get('users/delete/{id}',[UserController::class,'delete']);
+Route::resources([
+    'cats'=>CatController::class,
+    'product'=>ProductController::class,
+    'users'=>UserController::class
+]);
 
 
 Route::get('adminorder',[OrderController::class,'adminorders']);

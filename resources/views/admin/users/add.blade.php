@@ -9,7 +9,7 @@
 <h1 class='  m-5 text-center'>create new member</h1>
  
 
-<form class=" text-center " action="{{url('users')}}" method="post">
+<form class=" text-center " action="{{route('users.store')}}" method="post">
     @csrf
    
     <div class=' row'>

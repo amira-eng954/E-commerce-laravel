@@ -16,7 +16,7 @@
 
 @endif
 
-<form class=" text-center " action="{{url("users/$data->id")}}" method="post">
+<form class=" text-center " action="{{route('users.update',$data->id)}}" method="post">
     @csrf
     @method('put')
     

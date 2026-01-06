@@ -34,5 +34,13 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'google' => [
+  'client_id' => env('GOOGLE_CLIENT_ID'),
+  'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+  'redirect' => 'http://localhost:8000/google/callback'
+
+  //http://127.0.0.1:8000/google/callback
+  //env('GOOGLE_REDIRECT_URI')  http://localhost/google/callback  http://localhost:8000/google/callback
+],
 
 ];

@@ -19,7 +19,7 @@
 @endif
 
 
-    <form class=' text-center' action='{{url("cats")}}' method='post'>
+    <form class=' text-center' action="{{route('cats.store')}}" method='post'>
       @csrf
     <div class=' row mt-5 mb-3'>
         <label class='  col-md-2 form-label col-form-label fw-bold'>Name Category</label>

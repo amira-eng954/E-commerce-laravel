@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\CatRequest;
 use App\Models\Cat;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -8,32 +10,29 @@ use Illuminate\Http\Request;
 class CatController extends Controller
 {
     //
-    function all()
+    function index()
     {
-        $data=Cat::all();
-        //print_r($data);
-        return view('admin.cats.all',["data"=>$data]);
+        $cats=Cat::all();
+        return view('admin.cats.all',compact("cats"));
     }
-    function select($id)
+
+    function show($id)
     {
         $data=Cat::find($id);
         return view('admin.cats.show',["data"=>$data]);
     }
+
+
     function create()
     {
         return view("admin.cats.create");
     }
 
-    function store(Request $request)
-    {
-       
-        $data=$request->validate([
-            "namecat"=>"required|string",
-            "body"=>"required|string",
 
-            "order"=>"required"
-        ]);
-        Cat::create($data);
+    function store(CatRequest $request)
+    {
+       $category=$request->validated();
+        Cat::create($category);
         session()->flash('suc',"category added suc");
         return redirect(url("cats"));
         
@@ -45,32 +44,17 @@ class CatController extends Controller
         return view("admin.cats.edit",['data'=>$data]);
     }
 
-    function update($id,Request $request)
+  function update($id,CatRequest $request)
     {
-       $d=Cat::find($id);
-       
-       $request->validate([
-        "namecat"=>"required|string",
-        "body"=>"required|string",
-
-        "order"=>"required"
-    ]);
-   //echo $data['catname'],$data['desc'],$data['order'];
-    
-    $d->update([
-        "namecat"=>$request->namecat,
-        "body"=>$request->body,
-
-        "order"=>$request->order
-    ]);
-    session()->flash('suc',"category updated suc");
-    return redirect(url('cats'));
+       $category=Cat::find($id);
+       $category->update($request->validated());
+      session()->flash('suc',"category updated suc");
+      return redirect(url('cats'));
 
 }
-function delete($id)
+function destroy($id)
     {
-         $data=Cat ::find($id);
-         $data->delete();
+         $data=Cat::find($id)->delete();
          session()->flash('suc','Category deleted suc');
          return redirect(url('cats'));
 

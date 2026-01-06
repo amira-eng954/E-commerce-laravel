@@ -12,7 +12,7 @@
   @if(session()->has('suc'))
     <div class='alert alert-success'>{{session()->get('suc')}}</div>
 @endif
-<a href='{{url("pro/create")}}' class=' mb-5 btn btn-primary'> add product</a>
+<a href="{{route('product.create')}}" class=' mb-5 btn btn-primary'> add product</a>
     <table class=' text-center table table-bordered'>
       <tr>
         <th>#id</th>
@@ -26,7 +26,7 @@
         <th>control</th>
       </tr>
 
-      @foreach($data as $pro)
+      @foreach($products as $pro)
       <tr>
            <td>{{$pro->id}}</td>
            <td>{{$pro->title}}</td>
@@ -37,16 +37,20 @@
            <td>{{$pro->cat->namecat}}</td>
            <td>{{$pro->user->name}}</td>
            <td>
-            <a class='btn btn-success' href='{{url("product/$pro->id")}}'> show</a>
-            <a class='btn btn-info'  href='{{url("product/edit/$pro->id")}}'> edit</a>
-            <a class=' btn btn-danger'  href='{{url("product/delete/$pro->id")}}'>delete</a>
-
+            <a class='btn btn-success' href="{{route('product.show',$pro->id)}}"> show</a>
+            <a class='btn btn-info'  href="{{route('product.edit',$pro->id)}}"> edit</a>
+           
+             <form action= "{{route('product.destroy',$pro->id)}}" method="post">
+                @csrf
+                @method('DELETE')
+                <button  class=' btn btn-danger'>delete</button>
+               </form>
            </td>
       </tr>
       @endforeach
 
     </table>
-    {{ $data->links() }}
+    {{ $products->links() }}
   </div>
 
  

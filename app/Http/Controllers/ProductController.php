@@ -6,19 +6,22 @@ use App\Models\Product;
 use App\Models\Cat;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Events\CartEvent;
+use App\Http\Requests\ProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     //
-    public function all ()
+    public function index()
     {
-      $data=Product::paginate(5);
-      return view('admin.products.product',['data'=>$data]);
+      $products=Product::paginate(5);
+     return view('admin.products.product',compact("products"));
 
     }
 
-    public function show ($id)
+    public function show($id)
     {
         $data=Product::find($id);
         return view('admin.products.show',['data'=>$data]);
@@ -26,28 +29,18 @@ class ProductController extends Controller
 
     public function create()
     {
-        //echo"nnnnn";
         $cats=Cat::all();
         $users=User::all();
-        return view('admin.products.create',['cats'=>$cats,'users'=>$users]);
+        return view('admin.products.create',compact("cats","users"));
     }
 
-    public function store (Request $request)
+    public function store (ProductRequest $request)
     {
-        $data=$request->validate([
-            'title'=>'required|string',
-            'desc'=>'required|string',
-            'qun'=>'required|string',
-            'price'=>'required',
-            'cat_id'=>'required',
-            'user_id'=>'required',
-            'image'=>'required|image|mimes:png,jpg,avif,jpeg,webp'
-
-        ]);
+        $data=$request->validated();
         $data['image']=Storage::putFile("products",$data['image']);
-        Product::create($data);
+        $product=Product::create($data);
+        //event(new cartEvent( $product) );
         session()->flash('suc',"Product suc");
-        
         return redirect(url('product'));
     }
 
@@ -55,41 +48,28 @@ class ProductController extends Controller
     {  $data=Product::find($id);
         $cats=Cat::all();
         $users=User::all();
-        return view('admin.products.edit',["data"=>$data,'users'=>$users,'cats'=>$cats]);
+        return view('admin.products.edit',compact("data","cats","users"));
     }
 
-    public function update($id,Request $request)
+    public function update($id,UpdateProductRequest $request)
     {   
-        $d=Product::find($id);
-        
-        $data=$request->validate([
-            'title'=>'required|string',
-            'desc'=>'required|string',
-            'qun'=>'required|string',
-            'price'=>'required',
-            'cat_id'=>'required',
-            'user_id'=>'required',
-            'image'=>'image|mimes:png,jpg,avif,jpeg,webp'
-
-        ]);
-
+        $product=Product::find($id);
+        $data=$request->validated();
         if($request->has('image'))
         {
-            Storage::delete($d->image);
-            $data['image']=Storage::putFile("products",$data['image']);
+            Storage::delete($product->image);
+            $data['image']=Storage::putFile("products",$product['image']);
         }
-        $d->update($data);
+        $product->update($data);
         session()->flash("suc"," Product updated");
-
-
         return redirect(url('product'));
     }
 
-    public function delete ($id)
+    public function destroy($id)
     {
-        $dd=Product::find($id);
-        Storage::delete($dd['image']);
-        $dd->delete();
+        $product=Product::find($id);
+        Storage::delete($product['image']);
+        $product->delete();
         session()->flash("suc"," Product deleted");
         return redirect(url('product'));  
     }

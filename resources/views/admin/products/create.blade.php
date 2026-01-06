@@ -9,7 +9,7 @@
   @endforeach
   @endif
 
-<form class=" text-center " action="{{url('product')}}" method="post" enctype="multipart/form-data">
+<form class=" text-center " action="{{route('product.store')}}" method="post" enctype="multipart/form-data">
     @csrf
    
     <div class=' row'>

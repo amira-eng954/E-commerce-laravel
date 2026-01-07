@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
+use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Cat;
 use App\Models\User;
@@ -15,7 +16,6 @@ class HomeController extends Controller
           $cats=Cat::all();
           $products=Product::all();
           $users=User::all();
-        //var_dump($data);
         
           return view('admin.all',compact("cats","products","users"));
     
@@ -27,22 +27,26 @@ class HomeController extends Controller
            return view('admin.black');
 
         }
+
  
     public function index()
     {
       $products=Product::all();
       $cats=Cat::all();
-         return view('user.home',["products"=>$products,'cats'=>$cats]);
+         return view('user.home',compact("products","cats"));
     }
 
     public function cats($id)
     {
      
-      $products=Product::where("cat_id","=",$id)->get();
+     $products=Product::where("cat_id","=",$id)->get();
+     // $products=Cat::with('product')->get();
+      //return
+      //dd( $products);
       $cats=Cat::all();
      
-         return view('user.cat',["products"=>$products,'cats'=>$cats]
-         );  
+         return view('user.cat',compact("products","cats"));
+        
 
         }
 

@@ -34,6 +34,10 @@
         <li class="nav-item">
           <a class="nav-link text-white" href="{{url('adminorder')}}">Orders</a>
         </li> 
+
+         <li class="nav-item">
+          <a class="nav-link text-white" href="{{route('notification.admin')}}">Notification</a>
+        </li> 
        
        </ul>
     </div>

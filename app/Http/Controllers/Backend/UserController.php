@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
 
+
+namespace App\Http\Controllers\Backend;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;

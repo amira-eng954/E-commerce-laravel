@@ -78,10 +78,12 @@ https://templatemo.com/tm-546-sixteen-clothing
               </li>
               @endforeach
              
-              @if (Route::has('login'))
-                            <!-- <nav class="-mx-3 flex flex-1 justify-end"> -->
+               
+
+                         @if (Route::has('login'))
+                            <nav class="-mx-3 flex flex-1 justify-end">
                                 @auth
-                                <li class="nav-item">
+                                   <li class="nav-item">
                                     <a class="nav-link" href="{{url('All_order')}}">MyOrder</a>
                                 </li>
                                    <li class="nav-item">
@@ -90,31 +92,33 @@ https://templatemo.com/tm-546-sixteen-clothing
                                     
                                    </li>
                                 @else
-                                <li class="nav-item">
-                                    <a class="nav-link"
+                                 <li class="nav-item">
+                                    <a
                                         href="{{ route('login') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                        class="nav-link"
                                     >
                                         Log in
                                     </a>
-                                </li>
+                                    </li>
 
                                     @if (Route::has('register'))
                                     <li class="nav-item">
-                                        <a class="nav-link"
+                                        <a
                                             href="{{ route('register') }}"
-                                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                            class="nav-link"
                                         >
                                             Register
                                         </a>
                                     </li>
                                     @endif
                                 @endauth
-                           <!-- // </nav> -->
+                            </nav>
                         @endif
              
              
-            </ul>
+            
+            
+                      </ul>
           </div>
         </div>
       </nav>

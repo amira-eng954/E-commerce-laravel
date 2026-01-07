@@ -269,14 +269,7 @@
                                               <td>{{$pro->qun}}</td>
                                           <td>{{$pro->price}}</td>
                                        <td><img src='{{asset("storage/$pro->image")}}' width="80px" height="80px"></td>
-           <!-- <td>{{$pro->cat->namecat}}</td>
-           <td>{{$pro->user->name}}</td>
-           <td>
-            <a class='btn btn-success' href='{{url("product/$pro->id")}}'> show</a>
-            <a class='btn btn-info'  href='{{url("product/edit/$pro->id")}}'> edit</a>
-            <a class=' btn btn-danger'  href='{{url("product/delete/$pro->id")}}'>delete</a>
-
-           </td> -->
+          
       </tr>
       @endforeach
 

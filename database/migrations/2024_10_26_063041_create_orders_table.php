@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('code');
             $table->string('payment');
+            $table->string('status')->default('pending');
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
 
         });

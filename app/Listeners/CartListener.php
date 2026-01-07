@@ -25,10 +25,10 @@ class CartListener
     {
         //
         //dd($event->cart->qun);
-        $user = User::where('id',$event->cart->user_id)->first();
+        //$user = User::where('id',$event->cart->user_id)->first();
        // $ff=$product->update(['qun'=>"{$product->qun} - {$event->cart->qun}" ]);
        // dd($product['qun']);
-       $user->notify(new OrderNotification($event->cart));
+      // $user->notify(new OrderNotification($event->cart));
         //echo"amira";
     }
 }

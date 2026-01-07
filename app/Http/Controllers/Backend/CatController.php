@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Backend;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CatRequest;
 use App\Models\Cat;
 use App\Models\Product;

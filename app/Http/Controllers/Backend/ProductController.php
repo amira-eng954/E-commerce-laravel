@@ -1,7 +1,6 @@
 <?php
-
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Backend;
+use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Cat;
 use App\Models\User;
@@ -9,15 +8,20 @@ use Illuminate\Http\Request;
 use App\Events\CartEvent;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Notifications\ProductNotification;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     //
+    use AuthorizesRequests;
     public function index()
     {
       $products=Product::paginate(5);
-     return view('admin.products.product',compact("products"));
+     //$products=Product::with("user","cat")->paginate(1);
+      //dd($products);
+    return view('admin.products.product',compact("products"));
 
     }
 
@@ -29,6 +33,7 @@ class ProductController extends Controller
 
     public function create()
     {
+      $this->authorize('create',Product::class);
         $cats=Cat::all();
         $users=User::all();
         return view('admin.products.create',compact("cats","users"));
@@ -40,12 +45,15 @@ class ProductController extends Controller
         $data['image']=Storage::putFile("products",$data['image']);
         $product=Product::create($data);
         //event(new cartEvent( $product) );
+        auth()->user()->notify(new ProductNotification($product));
         session()->flash('suc',"Product suc");
         return redirect(url('product'));
     }
 
     public function edit($id)
-    {  $data=Product::find($id);
+    {  
+       $data=Product::find($id);
+       $this->authorize('edit',$data);
         $cats=Cat::all();
         $users=User::all();
         return view('admin.products.edit',compact("data","cats","users"));
@@ -68,9 +76,40 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product=Product::find($id);
+        $this->authorize('delete',$product);
         Storage::delete($product['image']);
         $product->delete();
         session()->flash("suc"," Product deleted");
         return redirect(url('product'));  
     }
+
+  public function  productTrash()
+  {
+    $products=Product::onlyTrashed()->paginate(5);
+    return view('admin.products.trashed',compact("products"));
+
+  }
+   public function productrestore($id)
+  {
+    
+    $product=Product::onlyTrashed()->find($id);
+    $this->authorize('restore',$product);
+    $product->restore();
+     session()->flash("suc"," Product restored");
+    return redirect(url('product'));
+
+    
+  }
+   public function  productdestroy($id)
+  {
+
+    $product=Product::onlyTrashed()->find($id);
+      $this->authorize('forceDelete',$product);
+    $product->forceDelete();
+     session()->flash("suc"," Product deleted forever");
+    return redirect(url('product'));
+    
+  }
+
+
 }

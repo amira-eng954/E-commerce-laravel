@@ -2,7 +2,7 @@
 @section('content')
 
  
-<h1>ALL Products</h1>
+<h1>ALL Trashed Products</h1>
 
 
 
@@ -12,8 +12,6 @@
   @if(session()->has('suc'))
     <div class='alert alert-success'>{{session()->get('suc')}}</div>
 @endif
-
-<a href="{{route('products.trash')}}" class=' mb-5 btn  btn-success'> Trashed</a>
 <a href="{{route('product.create')}}" class=' mb-5 btn btn-primary'> add product</a>
     <table class=' text-center table table-bordered'>
       <tr>
@@ -39,14 +37,15 @@
            <td>{{$pro->cat->namecat}}</td>
            <td>{{$pro->user->name}}</td>
            <td>
-            <a class='btn btn-success' href="{{route('product.show',$pro->id)}}"> show</a>
-            <a class='btn btn-info'  href="{{route('product.edit',$pro->id)}}"> edit</a>
            
-             <form action= "{{route('product.destroy',$pro->id)}}" method="post">
+            <a class='btn btn-info'  href="{{route('products.restore',$pro->id)}}"> restore</a>
+            <a class=' btn btn-danger'  href="{{route('products.destroy',$pro->id)}}"> destroy</a>
+           
+             <!-- <form action= "{{route('product.destroy',$pro->id)}}" method="post">
                 @csrf
-                @method('DELETE')
-                <button  class=' btn btn-danger'>delete</button>
-               </form>
+                @method('DELETE') -->
+                <!-- <button  class=' btn btn-danger'>delete</button> -->
+               <!-- </form> -->
            </td>
       </tr>
       @endforeach

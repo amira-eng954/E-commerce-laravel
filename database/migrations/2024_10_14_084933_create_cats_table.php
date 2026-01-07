@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('namecat');
             $table->string('body');
             $table->integer('order');
+            
             $table->timestamps();
         });
     }

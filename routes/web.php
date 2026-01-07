@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\CatController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\orderController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Backend\CatController;
+use App\Http\Controllers\Backend\NotificationController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\orderController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Backend\UserController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
@@ -27,13 +28,21 @@ Route::middleware('auth','admin')->group(function () {
 Route::get("/admin",[HomeController::class,'all'])->name('admin');
 Route::get("/bootstrap",[HomeController::class,'black']);//->name('admin');
 
+
+//********************************softDelete Products***************************** *// 
+Route::get('product/trash',[ProductController::class, 'productTrash'])->name('products.trash');
+Route::get('product/restore/{id}',[ProductController::class, 'productrestore'])->name('products.restore');
+Route::get('product/destroy/{id}',[ProductController::class, 'productdestroy'])->name('products.destroy');
+/*****************************************end softDelete ************************************ */
+
+
 Route::resources([
     'cats'=>CatController::class,
     'product'=>ProductController::class,
     'users'=>UserController::class
 ]);
 
-
+Route::get('notification/admin',[NotificationController::class,'notifications'])->name('notification.admin');
 Route::get('adminorder',[OrderController::class,'adminorders']);
 Route::get('order_update/{id}',[OrderController::class,'edit']);
 Route::put('order/{id}',[OrderController::class,'update']);

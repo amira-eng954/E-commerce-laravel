@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'title',
         'desc',
@@ -18,12 +19,13 @@ class Product extends Model
         'user_id'
 
     ];
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+  
 
     public function cat()
+    {
+        return $this->belongsTo(Cat::class);
+    }
+     public function user()
     {
         return $this->belongsTo(Cat::class);
     }

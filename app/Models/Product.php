@@ -16,7 +16,8 @@ class Product extends Model
         'price',
         'image',
         'cat_id',
-        'user_id'
+        'user_id',
+        'status'
 
     ];
   

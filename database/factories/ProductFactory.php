@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Cat;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,8 +24,8 @@ class ProductFactory extends Factory
         'qun'=>$this->faker->randomDigit(),
         'price'=>$this->faker->randomDigit(),
         'image'=>$this->faker->imageUrl(),
-        'cat_id'=>1,
-        'user_id'=>1
+        'cat_id'=>Cat::all()->random()->id,
+        'user_id'=>User::where('role','admin')->inRandomOrder()->first()->id
         ];
     }
 }

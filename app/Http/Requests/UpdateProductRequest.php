@@ -29,7 +29,7 @@ class UpdateProductRequest extends FormRequest
             'price'=>'required',
             'cat_id'=>'required',
             'user_id'=>'required',
-            'image'=>'image|mimes:png,jpg,avif,jpeg,webp'
+           // 'image'=>'image|mimes:png,jpg,avif,jpeg,webp'
         ];
     }
 }

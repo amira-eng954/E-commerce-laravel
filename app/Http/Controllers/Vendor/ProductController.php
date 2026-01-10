@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\vendor;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\VendorProductRequest;
 use App\Models\Cat;
 use App\Models\Product;
@@ -21,14 +22,11 @@ class ProductController extends Controller
     public function index()
     {
         //
+        $products=Auth::user()->product()->with('cat')->get();
         
-        $products=Product::where('user_id',Auth::user()->id)->get();
-       // dd($products);
-      // $products->load('cat');
-       //$products=Auth::user()->products()->get();
-       dd($products->toArray());
-       //dd(Auth::user()->id);
-      // return view('vendor.index',compact("products"));
+      
+    
+      return view('vendor.products.index',compact("products"));
     }
 
     /**
@@ -38,7 +36,7 @@ class ProductController extends Controller
     {
         //
         $cats=Cat::all();
-        return view('vendor.create',compact("cats"));
+        return view('vendor.products.create',compact("cats"));
     }
 
     /**
@@ -49,12 +47,13 @@ class ProductController extends Controller
         //
         $product=$request->validated();
         $product['user_id']= Auth::id();
-         $data['image']=Storage::putFile("products",$product['image']);
-        Product::create($product);
-        
+        $product['image']=Storage::putFile("products",$product['image']);
+        $product=Product::create($product);
+      //  dd($product);
        
         session()->flash('suc',"Product suc");
-        return redirect(route('vendor.products'));
+       
+         return redirect(route('vendor.products.index'));
       
     }
 
@@ -72,14 +71,30 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         //
+        $data=Auth::user()->Product()->find($id);
+       $this->authorize('update',$data);
+        $cats=Cat::all();
+       //dd($data);
+        return view('vendor.products.edit',compact("data","cats"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(VendorProductRequest $request, string $id)
+    {   $user=Auth::user();
+         $product=$user->Product()->find($id);
+        $data=$request->validated();
+        $data['user_id']=$user->id;
+        if($request->has('image'))
+        {
+            Storage::delete($product->image);
+            $data['image']=Storage::putFile("products",$product['image']);
+        }
+        $product->update($data);
+        //dd($data['user_id']);
+        session()->flash("suc"," Product updated");
+        return redirect(route('vendor.products.index'));
     }
 
     /**
@@ -92,5 +107,7 @@ class ProductController extends Controller
         $product=$user->product()->find($id);
           $this->authorize('delete', $product);
           $product->delete();
+          session()->flash('suc',"Product deleted suc");
+        return redirect(route('vendor.products.index'));
     }
 }

@@ -37,7 +37,7 @@ class ProductController extends Controller
         $cats=Cat::all();
         $users=User::where('role','vendor')->get();
         //dd($users);
-        return view('admin.products.create',compact("cats","users"));
+        return view('vendor.products.create',compact("cats","users"));
     }
 
     public function store (ProductRequest $request)
@@ -46,7 +46,7 @@ class ProductController extends Controller
         $data['image']=Storage::putFile("products",$data['image']);
         $product=Product::create($data);
         //event(new cartEvent( $product) );
-        auth()->user()->notify(new ProductNotification($product));
+        //auth()->user()->notify(new ProductNotification($product));
         session()->flash('suc',"Product suc");
         return redirect(url('product'));
     }

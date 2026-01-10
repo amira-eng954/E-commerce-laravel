@@ -9,7 +9,7 @@
   @endforeach
   @endif
 
-<form  action="{{ route('product.update',$data->id)}}" method="post" enctype="multipart/form-data">
+<form  action="{{ route('vendor.products.update',$data->id)}}" method="post" enctype="multipart/form-data">
     @csrf
    @method('put')
     <div class=' row class=" text-center "'>
@@ -54,17 +54,6 @@
         </div>
     </div>
 
-    <div class='row mb-3'>
-        <lable class=' col-md-2 col-form-label text-center  fw-bold'>Username</lable>
-        <div class=' col-md-6'>
-            <select name='user_id' class=' form-control-lg  form-control mb-3'>
-                @foreach($users as $user)
-               <option  @if( $user->id == $data->user_id)selected @endif value="{{$user->id}}"> {{$user->name}}</option>
-                @endforeach
-            </select>
-          
-        </div>
-    </div>
     
     
 

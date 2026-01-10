@@ -18,7 +18,7 @@ class ProductController extends Controller
     use AuthorizesRequests;
     public function index()
     {
-      $products=Product::with('user',"cat")->paginate(5);
+      $products=Product::with(['user',"cat"])->paginate(5);
    
       //dd($products);
     return view('admin.products.product',compact("products"));

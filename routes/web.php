@@ -12,9 +12,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 
-// Route::get('/admin/dashboard', function () {
-//     return view('');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -22,10 +20,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//Route::resource('product',ProductController::class);
 // admin control users , product , catorries, oreders update
 Route::middleware('auth','admin')->group(function () {
-Route::get("/admin/dashboard",[HomeController::class,'all'])->name('dashboard');
+Route::get("/admin/dashboard",[HomeController::class,'all'])->name('admin.dashboard');
 Route::get("/bootstrap",[HomeController::class,'black']);//->name('admin');
 
 

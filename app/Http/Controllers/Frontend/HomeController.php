@@ -9,11 +9,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    //
-   
-        
-
- 
+  
     public function index()
     {
       $products=Product::with('cat')
@@ -24,42 +20,38 @@ class HomeController extends Controller
          return view('user.home',compact("products","cats"));
     }
 
-    public function cats($id)
+   public function cats($id)
     {
      
-     $products=Product::where("cat_id","=",$id)->get();
-     // $products=Cat::with('product')->get();
-      //return
-      //dd( $products);
+      $products=Product::where("cat_id","=",$id)->get();
       $cats=Cat::all();
      
-         return view('user.cat',compact("products","cats"));
-        
-
-        }
+       return view('user.cat',compact("products","cats"));
+    }
 
 
-
-
- public function oneproduct($id)
+   public function oneproduct($id)
     {
      
-      $products=Product::find($id);
-      $cats=Cat::all();
+        $data=Product::with(['user','cat'])->find($id);
+        $cats=Cat::all();
      
-         return view('user.show',["data"=>$products,'cats'=>$cats]
-         );  
+         return view('user.show',compact("data","cats"));
+       
+   }
 
-        }
-        public function about()
-        { $cats=Cat::all();
-            return view('user.about',['cats'=>$cats]);
-        }
+   public function about()
+   { 
+     $cats=Cat::all();
+     return view('user.about',['cats'=>$cats]);
 
-        public function contact()
-        { $cats=Cat::all();
-            return view('user.contact',['cats'=>$cats]);
-        }
+   }
+
+    public function contact()
+     { 
+        $cats=Cat::all();
+         return view('user.contact',['cats'=>$cats]);
+    }
 
  
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\vendor;
 
+use App\Events\ProductEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\VendorProductRequest;
@@ -48,8 +49,11 @@ class ProductController extends Controller
         //
         $user=Auth::user();
         $product=$request->validated();
+        $product['user_id']=$user->id;
         $product['image']=Storage::putFile("products",$product['image']);
-        $product=$user->product()->create($product);
+        //$product=$user->product()->create($product);
+        $product=Product::create($product);
+        ProductEvent::dispatch($product);
       //  dd($product);
        
         session()->flash('suc',"Product suc");

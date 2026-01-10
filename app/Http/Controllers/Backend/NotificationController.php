@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,10 +16,13 @@ class NotificationController extends Controller
     {
            $notifications=Auth::user()->notifications()->get();
            $count=Auth::user()->unreadNotifications()->count();
-           echo $count;
+           //echo $count;
            foreach($notifications as $r)
            {
-            echo $r->data['data'],$r->data['price'];
+            Carbon::parse($r->data['created_at'])->diffForHumans();
+            echo $r->data['title'],$r->data['body'],
+            
+            Carbon::parse($r->data['created_at'])->diffForHumans();
            }
     }
 

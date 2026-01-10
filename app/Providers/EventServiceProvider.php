@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 use App\Events\CartEvent;
+use App\Events\ProductEvent;
 use App\Listeners\CartListener;
-
+use App\Listeners\ProductListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -16,6 +17,10 @@ class EventServiceProvider extends ServiceProvider
 
      CartEvent::class=>[
            CartListener::class
+     ],
+
+     ProductEvent::class=>[
+           ProductListener::class
      ],
 
 

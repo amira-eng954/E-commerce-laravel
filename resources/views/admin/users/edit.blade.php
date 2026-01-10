@@ -41,6 +41,17 @@
     <input type ='password' name='password'   class='form-control-lg  form-control' autocomplete="new-password">
     </div>
     </div>
+
+     <div class=' row'>
+    <lable class=' mt-3 col-md-2 col-form-label fw-bold'>Role</lable>
+    <div class='  col-md-6'>
+    <select  name='role' class='form-control-lg mt-3  form-control' autocomplete="new-password">
+    <option>select role</option>
+   <option value="admin" @selected($data->role == 'admin') >Admin</optin>
+   <option value="vendor"  @if($data->role=='vendor') selected @endif>Vendor</option>
+   <option value="user" @selected($data->role == 'user')>User</option>
+    </div>
+    </div>
   
     <div class=' row'>
    

@@ -18,8 +18,8 @@ class ProductController extends Controller
     use AuthorizesRequests;
     public function index()
     {
-      $products=Product::paginate(5);
-     //$products=Product::with("user","cat")->paginate(1);
+      $products=Product::with('user',"cat")->paginate(5);
+   
       //dd($products);
     return view('admin.products.product',compact("products"));
 
@@ -35,7 +35,8 @@ class ProductController extends Controller
     {
       $this->authorize('create',Product::class);
         $cats=Cat::all();
-        $users=User::all();
+        $users=User::where('role','vendor')->get();
+        //dd($users);
         return view('admin.products.create',compact("cats","users"));
     }
 
@@ -53,7 +54,7 @@ class ProductController extends Controller
     public function edit($id)
     {  
        $data=Product::find($id);
-       $this->authorize('edit',$data);
+       $this->authorize('update',$data);
         $cats=Cat::all();
         $users=User::all();
         return view('admin.products.edit',compact("data","cats","users"));

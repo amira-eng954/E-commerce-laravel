@@ -17,7 +17,7 @@ class HomeController extends Controller
           $products=Product::all();
           $users=User::all();
         
-          return view('admin.all',compact("cats","products","users"));
+          return view('admin.dashboard',compact("cats","products","users"));
     
         }
 

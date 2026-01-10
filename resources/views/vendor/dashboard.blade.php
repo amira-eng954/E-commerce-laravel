@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - SB Admin</title>
+        <title>Dashboard - SB vendor</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -55,18 +55,7 @@
                             </a>
 
 
-                            <div class="sb-sidenav-menu-heading"> All users</div>
-                            <a class="nav-link collapsed" href="{{url('product')}}" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                all-users
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{url('users')}}">members</a>
-                                    <a class="nav-link" href="{{route('users.create')}}">Add-new-member</a>
-                                </nav>
-                            </div>
+                            
 
                             <div class="sb-sidenav-menu-heading"> All Products</div>
                             <a class="nav-link collapsed" href="{{url('product')}}" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -81,32 +70,10 @@
                                 </nav>
                             </div>
 
-                            <div class="sb-sidenav-menu-heading"> All Categories</div>
-                            <a class="nav-link collapsed" href="{{url('cats')}}" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                             Categories
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{url('cats')}}">All-Categories</a>
-                                    <a class="nav-link" href="{{route('cats.create')}}">Add-new-categories</a>
-                                </nav>
-                            </div>
+                            
 
                       
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                orders
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{url('adminorder')}}">Orders</a>
-                                    <a class="nav-link" href="{{url('adminorder')}}">Update Orders</a>
-                                </nav>
-                            </div>
+                           
 
 
                             <div class="sb-sidenav-menu-heading">Interface</div>
@@ -206,12 +173,7 @@
                                     <div class="card-body">
                                 
                                        <div>
-                                       @foreach($users as $ss)
-                                               <span>name :{{$ss->name}}</span>
-                                               <p>email {{$ss->email}}</p>
-                                              
-                                      
-                                    @endforeach
+                                     
 
                                        </div>
                                 </div>
@@ -225,13 +187,7 @@
                                     </div>
                                     <div class="card-body">
                                            <div>
-                                            @foreach($cats as $d)
-
-                                             <span>name :{{$d->namecat}}</span>
-                                               <p>description {{$d->body}}</p>
-                                              
-                                         
-                                          @endforeach
+                                          
                                            </div>
                                 </div>
                                 </div>
@@ -261,7 +217,7 @@
                                     </tfoot>
                                     <tbody>
 
-                                    @foreach($products as $pro)
+                                    @foreach($products->product as $pro)
                                      
                                          <td>{{$pro->id}}</td>
                                          <td>{{$pro->title}}</td>

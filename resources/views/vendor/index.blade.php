@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('vendor.layouts')
 @section('content')
 
  
@@ -13,8 +13,8 @@
     <div class='alert alert-success'>{{session()->get('suc')}}</div>
 @endif
 
-<a href="{{route('products.trash')}}" class=' mb-5 btn  btn-success'> Trashed</a>
-<a href="{{route('product.create')}}" class=' mb-5 btn btn-primary'> add product</a>
+
+<a href="{{route('vendor.products.create')}}" class=' mb-5 btn btn-primary'> add product</a>
     <table class=' text-center table table-bordered'>
       <tr>
         <th>#id</th>
@@ -38,10 +38,10 @@
            <td>{{$pro->cat->namecat}}</td>
           
            <td>
-            <a class='btn btn-success' href="{{route('product.show',$pro->id)}}"> show</a>
-            <a class='btn btn-info'  href="{{route('product.edit',$pro->id)}}"> edit</a>
+            <a class='btn btn-success' href="{{route('vendor.products.show',$pro->id)}}"> show</a>
+            <a class='btn btn-info'  href="{{route('vendor.products.edit',$pro->id)}}"> edit</a>
            
-             <form action= "{{route('product.destroy',$pro->id)}}" method="post">
+             <form action= "{{route('vendor.products.destroy',$pro->id)}}" method="post">
                 @csrf
                 @method('DELETE')
                 <button  class=' btn btn-danger'>delete</button>
@@ -51,7 +51,7 @@
       @endforeach
 
     </table>
-    {{ $products->links() }}
+    
   </div>
 
  

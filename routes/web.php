@@ -12,9 +12,9 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/admin/dashboard', function () {
+//     return view('');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -22,10 +22,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
+//Route::resource('product',ProductController::class);
 // admin control users , product , catorries, oreders update
 Route::middleware('auth','admin')->group(function () {
-Route::get("/admin",[HomeController::class,'all'])->name('admin');
+Route::get("/admin/dashboard",[HomeController::class,'all'])->name('dashboard');
 Route::get("/bootstrap",[HomeController::class,'black']);//->name('admin');
 
 
@@ -73,4 +73,4 @@ Route::get('cart/',[CartController::class ,'confirm']);
  Route::get('about',[HomeController::class,'about']);//->name('redirect');
  Route::get('contact',[HomeController::class,'contact']);//->name('redirect');
 require __DIR__.'/auth.php';
-  
+require __DIR__.'/vendor.php'; 

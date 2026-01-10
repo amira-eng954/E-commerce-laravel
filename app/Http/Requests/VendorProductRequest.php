@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UserRequest extends FormRequest
+class VendorProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,15 +22,14 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-             "name"=>"required|string|max:255",
-            //"email"=>"required|string",
-            "email"=>[
-                "required",
-                'email',
-                Rule::unique('users','email')->ignore($this->user)
-            ],
-            "password"=>"required|string",
-            'role'=>"required|in:user,admin,vendor"
+            //
+            'title'=>'required|string',
+            'desc'=>'required|string',
+            'qun'=>'required|string',
+            'price'=>'required',
+            'cat_id'=>'required',
+           
+            'image'=>'required|image|mimes:png,jpg,avif,jpeg,webp'
         ];
     }
 }

@@ -49,7 +49,7 @@
     <div class='  col-md-6'>
     <select  name='role' class='form-control-lg mt-3  form-control' autocomplete="new-password">
     <option>select role</option>
-   <optin value="admin">Admin</optin>
+   <option value="admin">Admin</optin>
    <option value="vendor" >Vendor</option>
    <option value="user">User</option>
     </div>

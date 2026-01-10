@@ -27,7 +27,7 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $data=Product::find($id);
+        $data=Product::with('cat')->find($id);
         return view('admin.products.show',['data'=>$data]);
     }
 
@@ -45,8 +45,6 @@ class ProductController extends Controller
         $data=$request->validated();
         $data['image']=Storage::putFile("products",$data['image']);
         $product=Product::create($data);
-        //event(new cartEvent( $product) );
-        //auth()->user()->notify(new ProductNotification($product));
         session()->flash('suc',"Product suc");
         return redirect(url('product'));
     }

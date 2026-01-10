@@ -67,7 +67,16 @@
     </div>
     
     
-
+<div class=' row'>
+    <lable class='   col-md-2 col-form-label fw-bold'>Status</lable>
+    <div class='  col-md-6'>
+    <select  name='status' class='form-control-lg mt-3 mb-4  form-control' autocomplete="new-password">
+    <option>select status</option>
+   <option value="active" @selected($data->status =='active')>Active</optin>
+   <option value="inactive" @selected($data->status =='inactive') >Inactive</option>
+  
+    </div>
+    </div>
     
     
 

@@ -29,7 +29,7 @@ class VendorProductRequest extends FormRequest
             'price'=>'required',
             'cat_id'=>'required',
            
-            'image'=>'required|image|mimes:png,jpg,avif,jpeg,webp'
+            'image'=>'image|mimes:png,jpg,avif,jpeg,webp'
         ];
     }
 }

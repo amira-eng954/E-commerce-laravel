@@ -19,7 +19,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ">
         <li class="nav-item  ">
-          <a class="nav-link active text-white" aria-current="page" href="{{url('admin')}}">dashboard</a>
+          <a class="nav-link active text-white" aria-current="page" href="{{url('admin/dashboard')}}">dashboard</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white" href="{{url('product')}}">Products</a>

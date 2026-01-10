@@ -14,6 +14,7 @@
                <li>  <span> Description :</span>{{$data->desc}}</li>
                <li>  <span> Quntaty :</span>{{$data->qun}}</li>
                <li>  <span> Price :</span>{{$data->price}}</li>
+                 <li>  <span> category :</span>{{$data->cat->namecat}}</li>
              </ul>
         </div>
 </div>

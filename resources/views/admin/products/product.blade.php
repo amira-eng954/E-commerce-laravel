@@ -21,8 +21,9 @@
         <th>title</th>
         <th>descripton</th>
         <th>quntaty</th>
-        <th>#price</th>
-        <th>#imge</th>
+        <th>price</th>
+        <th>status</th>
+        <th>iamge</th>
         <th>Category</th>
         <th>control</th>
       </tr>
@@ -33,7 +34,8 @@
            <td>{{$pro->title}}</td>
            <td>{{$pro->desc}}</td>
            <td>{{$pro->qun}}</td>
-           <td>{{$pro->price}}</td>
+            <td>{{$pro->price}}</td>
+           <td> <button class=" btn {{ $pro->status === 'active' ? 'btn-success' : 'btn-danger' }}">{{$pro->status}}</button></td>
            <td><img src='{{asset("storage/$pro->image")}}' width="80px" height="80px"></td>
            <td>{{$pro->cat->namecat}}</td>
           

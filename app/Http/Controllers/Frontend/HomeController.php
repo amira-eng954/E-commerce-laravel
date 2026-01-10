@@ -11,27 +11,15 @@ class HomeController extends Controller
 {
     //
    
-        public function all ()
-        {
-          $cats=Cat::all();
-          $products=Product::all();
-          $users=User::all();
         
-          return view('admin.dashboard',compact("cats","products","users"));
-    
-        }
-
-
-    public function black ()
-        {
-           return view('admin.black');
-
-        }
 
  
     public function index()
     {
-      $products=Product::all();
+      $products=Product::with('cat')
+      ->where('status','active')
+      ->latest()
+      ->get();
       $cats=Cat::all();
          return view('user.home',compact("products","cats"));
     }

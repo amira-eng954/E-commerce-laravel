@@ -30,6 +30,7 @@ class UpdateProductRequest extends FormRequest
             'cat_id'=>'required',
             'user_id'=>'required',
            // 'image'=>'image|mimes:png,jpg,avif,jpeg,webp'
+           'status'=>"required|in:active,inactive"
         ];
     }
 }

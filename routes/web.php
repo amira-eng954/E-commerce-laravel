@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\CatController;
+use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\NotificationController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -22,8 +23,8 @@ Route::middleware('auth')->group(function () {
 
 // admin control users , product , catorries, oreders update
 Route::middleware('auth','admin')->group(function () {
-Route::get("/admin/dashboard",[HomeController::class,'all'])->name('admin.dashboard');
-Route::get("/bootstrap",[HomeController::class,'black']);//->name('admin');
+Route::get("/admin/dashboard",[DashboardController::class,'all'])->name('dashboard');
+Route::get("/bootstrap",[DashboardController::class,'black']);//->name('admin');
 
 
 //********************************softDelete Products***************************** *// 
@@ -64,7 +65,7 @@ Route::get('cart/',[CartController::class ,'confirm']);
 // redirect website
 
  Route::get("/",[HomeController::class,'index']);//->name('redirect');
- Route::get("/redirect",[HomeController::class,'index']);//->name('redirect');
+ Route::get("/redirect",[HomeController::class,'index'])->name('redirect');
  Route::get('cat/{id}',[HomeController::class,'cats']);//->name('redirect');
  Route::get('show/{id}',[HomeController::class,'oneproduct']);//->name('redirect');
  Route::get('about',[HomeController::class,'about']);//->name('redirect');

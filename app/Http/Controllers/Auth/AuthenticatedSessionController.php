@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
         $x=Auth::user()->role;
         if($x=='admin')
         {
-            return redirect()->intended(route('admin.dashboard', absolute: false));
+            return redirect()->intended(route('dashboard', absolute: false));
         }
         elseif($x=='vendor')
         {
@@ -38,9 +38,9 @@ class AuthenticatedSessionController extends Controller
               return redirect()->intended(route('vendor.dashboard', absolute: false));
         }
         elseif($x=="user"){
-            return redirect('redirect');
+            //return redirect('redirect');
 
-       // return redirect()->intended(route('redirect', absolute: false));
+        return redirect()->intended(route('redirect', absolute: false));
     }
 }
 

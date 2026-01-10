@@ -35,6 +35,7 @@ class ProductController extends Controller
     public function create()
     {
         //
+        $this->authorize('create',Product::class);
         $cats=Cat::all();
         return view('vendor.products.create',compact("cats"));
     }
@@ -45,10 +46,10 @@ class ProductController extends Controller
     public function store(VendorProductRequest $request)
     {
         //
+        $user=Auth::user();
         $product=$request->validated();
-        $product['user_id']= Auth::id();
         $product['image']=Storage::putFile("products",$product['image']);
-        $product=Product::create($product);
+        $product=$user->product()->create($product);
       //  dd($product);
        
         session()->flash('suc',"Product suc");
@@ -72,6 +73,7 @@ class ProductController extends Controller
     {
         //
         $data=Auth::user()->Product()->find($id);
+        $this->authorize('update',$data);
        $this->authorize('update',$data);
         $cats=Cat::all();
        //dd($data);

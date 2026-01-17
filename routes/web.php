@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\orderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Frontend\PaymentController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
@@ -52,13 +53,15 @@ Route::get('order_delete/{id}',[OrderController::class,'delete']);
 
 // users can request orders
 Route::middleware('auth')->group(function () {
- Route::get('All_order',[orderController::class ,'allorder']);   
-Route::post('order',[orderController::class ,'create_order']);
+ Route::get('All_order',[orderController::class ,'MyOrder']);   
+Route::get('order/create',[orderController::class ,'create_order']);
 Route::get('amira',[orderController::class ,'delete_carts']);
-Route::get('carts/',[CartController::class ,'all']);
-Route::post('cart/{id}',[CartController::class ,'carts']);
+
+// insert product in cart $$ show my carts $$ delete product in 1cart
+Route::get('carts/',[CartController::class ,'myCarts']);
+Route::post('cart/{id}',[CartController::class ,'insertCart']);
 Route::get('cart/{id}',[CartController::class ,'delete']);
-Route::get('cart/',[CartController::class ,'confirm']);
+//Route::get('cart/',[CartController::class ,'confirm']);  order/details
 });
 ///end order user
 
@@ -69,6 +72,9 @@ Route::get('cart/',[CartController::class ,'confirm']);
  Route::get('cat/{id}',[HomeController::class,'cats']);//->name('redirect');
  Route::get('show/{id}',[HomeController::class,'oneproduct']);//->name('redirect');
  Route::get('about',[HomeController::class,'about']);//->name('redirect');
+
  Route::get('contact',[HomeController::class,'contact']);//->name('redirect');
+
+ Route::get('payment/order',[PaymentController::class,'payment'])->name('payment.order');
 require __DIR__.'/auth.php';
 require __DIR__.'/vendor.php'; 

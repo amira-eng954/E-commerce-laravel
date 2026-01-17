@@ -31,9 +31,9 @@ class Product extends Model
         return $this->belongsTo(Cat::class);
     }
 
-    public function item()
+    public function items()
     {
-        return $this->hasMany(Item::class);
+        return $this->hasMany(OrderItem::class);
     }
 
 }

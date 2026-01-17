@@ -27,27 +27,27 @@
     <tr>
     <?php
           $xx=0;
-          $total=0
+      
         ?>
-        @foreach($data->cart as $datas)
+        @foreach($carts as $cart)
        <?php
-         $ss=$datas->product->image;
+         $ss=$cart->product->image;
          
        ?>
        <td><img src='{{asset("storage/$ss")}}' height="80px" width="80px"></td>
-        <td>{{$datas->product->title}}</td>
-        <td>{{$datas->product->price}}</td>
-        <td>{{$datas->qun}}</td>
+        <td>{{$cart->product->title}}</td>
+        <td>{{$cart->product->price}}</td>
+        <td>{{$cart->qun}}</td>
        
         <?php
 
         // $xx=$xx+ $data->price
-        $xx=$datas->product->price *$datas->qun
+        $xx=$cart->product->price *$cart->qun
         ?>
         <td>{{$xx}}</td>
-        <td><a href='{{url("cart/$datas->id")}}' class=' btn btn-danger'>delete order</a></td>
+        <td><a href='{{url("cart/$cart->id")}}' class=' btn btn-danger'>delete order</a></td>
         <?php
-       $total=$total+$xx;
+       
        ?>
 
     </tr>
@@ -63,7 +63,7 @@
 </div>  
 <h5 class='fw-bold mb-3'>Total : {{$total}}</h5>
 
-<a href='{{url("cart/")}}' class=' btn btn-primary '>confirm order</a>  
+<a href='{{url("order/create")}}' class=' btn btn-primary '>confirm order</a>  
 </div> 
 
 @endsection

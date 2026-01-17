@@ -43,4 +43,10 @@ return [
   //env('GOOGLE_REDIRECT_URI')  http://localhost/google/callback  http://localhost:8000/google/callback
 ],
 
+ 'stripe' => [
+    'publishable_key'=>env('STRIPE_PUBLISHABLE_KEY'), 
+    'secret_key'=>env('SECRET_KEY'),
+
+ ],
+
 ];

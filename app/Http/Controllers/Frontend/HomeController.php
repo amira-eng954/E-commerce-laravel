@@ -14,7 +14,7 @@ class HomeController extends Controller
   public function index()
   {
     $products = Product::with('cat')
-      ->where('status', 'active')
+      
       ->latest()
       ->get();
     $cats = Cat::all();

@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <title>Sixteen Clothing HTML Template</title>
+  <title>Sixteen Clothing HTML Template</title>
 
-    <!-- Bootstrap core CSS -->
-   
-    <link rel="stylesheet" href="{{asset('pro/css/bootstrap.min.css')}}">
-    <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-<!--
+  <!-- Bootstrap core CSS -->
+
+  <link rel="stylesheet" href="{{asset('pro/css/bootstrap.min.css')}}">
+  <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+  <!--
 
 TemplateMo 546 Sixteen Clothing
 
@@ -23,130 +23,158 @@ https://templatemo.com/tm-546-sixteen-clothing
 
 -->
 
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="{{asset('assets/css/fontawesome.css')}}">
-    <link rel="stylesheet" href="{{asset('pro/css/all.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/templatemo-sixteen.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/owl.css')}}">
-@yield('css')
-  </head>
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="{{asset('assets/css/fontawesome.css')}}">
+  <link rel="stylesheet" href="{{asset('pro/css/all.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/css/templatemo-sixteen.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/css/owl.css')}}">
+  @yield('css')
+</head>
 
-  <body>
+<body>
 
-    <!-- ***** Preloader Start ***** -->
+  <!-- ***** Preloader Start ***** -->
 
-     <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>  
- 
+  <div id="preloader">
+    <div class="jumper">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
 
 
-    
-    <!-- ***** Preloader End ***** -->
 
-    <!-- Header -->
-    <header class="">
-      <nav class="navbar navbar-expand-lg">
-        <div class="container">
-          <a class="navbar-brand" href="{{url('redirect')}}"><h2>Sixteen <em>Clothing</em></h2></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="{{url('redirect')}}">Home
-                  <!-- <span class="sr-only">(current)</span> -->
+
+  <!-- ***** Preloader End ***** -->
+
+  <!-- Header -->
+  <header class="">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="{{url('redirect')}}">
+          <h2>Sixteen <em>Clothing</em></h2>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <!-- <form action="{{URL::current()}}" method='get'>
+             
+                <select name="locale" onchange="this.form.submit()">
+
+
+                  <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>
+                    English
+                  </option>
+
+                  <option value="ar" {{ app()->getLocale() == 'ar' ? 'selected' : '' }}>
+                    Arbic
+                  </option>
+                </select>
+
+
+              </form> -->
+<ul>
+    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+        <li>
+            <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                {{ $properties['native'] }}
+            </a>
+        </li>
+    @endforeach
+</ul>
+
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{{url('redirect')}}">{{ trans('app.home') }}
+                <!-- <span class="sr-only">(current)</span> -->
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('redirect')}}">Our Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('about')}}">{{__('app.about')}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('contact')}}">@lang('app.contact')</a>
+            </li>
+            @foreach($cats as $cat)
+            <li class="nav-item">
+              <a class="nav-link" href='{{url("cat/$cat->id")}}'>{{$cat->namecat}}</a>
+            </li>
+            @endforeach
+
+
+
+            @if (Route::has('login'))
+            <nav class="-mx-3 flex flex-1 justify-end">
+              @auth
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('All_order')}}">MyOrder</a>
+              </li>
+              <li class="nav-item">
+                <x-app-layout></x-app-layout>
+
+
+              </li>
+              @else
+              <li class="nav-item">
+                <a
+                  href="{{ route('login') }}"
+                  class="nav-link">
+                  {{ __('app.login') }}
                 </a>
-              </li> 
-              <li class="nav-item">
-                <a class="nav-link" href="{{url('redirect')}}">Our Products</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{url('about')}}">About Us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{url('contact')}}">Contact Us</a>
-              </li>
-              @foreach($cats as $cat)
-              <li class="nav-item">
-                <a class="nav-link" href='{{url("cat/$cat->id")}}'>{{$cat->namecat}}</a>
-              </li>
-              @endforeach
-             
-               
 
-                         @if (Route::has('login'))
-                            <nav class="-mx-3 flex flex-1 justify-end">
-                                @auth
-                                   <li class="nav-item">
-                                    <a class="nav-link" href="{{url('All_order')}}">MyOrder</a>
-                                </li>
-                                   <li class="nav-item">
-                                    <x-app-layout></x-app-layout>
-                                    
-                                    
-                                   </li>
-                                @else
-                                 <li class="nav-item">
-                                    <a
-                                        href="{{ route('login') }}"
-                                        class="nav-link"
-                                    >
-                                        Log in
-                                    </a>
-                                    </li>
+              @if (Route::has('register'))
+              <li class="nav-item">
+                <a
+                  href="{{ route('register') }}"
+                  class="nav-link">
+                  {{ __('app.register') }}
+                </a>
+              </li>
+              @endif
+              @endauth
+            </nav>
+            @endif
 
-                                    @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a
-                                            href="{{ route('register') }}"
-                                            class="nav-link"
-                                        >
-                                            Register
-                                        </a>
-                                    </li>
-                                    @endif
-                                @endauth
-                            </nav>
-                        @endif
-             
-             
-            
-            
-                      </ul>
-          </div>
+
+
+
+          </ul>
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
+  </header>
 
-    <!-- Page Content -->
-    <!-- Banner Starts Here -->
-    @yield('start')
-    <!-- Banner Ends Here -->
-
-   
-         
-         
-          
-   
-         
-         
-          
-              
-      
-          @yield('body')
-        
-     
+  <!-- Page Content -->
+  <!-- Banner Starts Here -->
+  @yield('start')
+  <!-- Banner Ends Here -->
 
 
-        
 
-    <!-- <div class="best-features">
+
+
+
+
+
+
+
+
+  @yield('body')
+
+
+
+
+
+
+  <!-- <div class="best-features">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
@@ -178,72 +206,67 @@ https://templatemo.com/tm-546-sixteen-clothing
     </div>-->
 
 
-    <div class="call-to-action">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="inner-content">
-              <div class="row">
-                <div class="col-md-8">
-                  <h4>Creative &amp; Unique <em>Sixteen</em> Products</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis amet elite author nulla.</p>
-                </div>
-                <div class="col-md-4">
-                  <a href="#" class="filled-button">Purchase Now</a>
-                </div>
+  <div class="call-to-action">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="inner-content">
+            <div class="row">
+              <div class="col-md-8">
+                <h4>Creative &amp; Unique <em>Sixteen</em> Products</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis amet elite author nulla.</p>
+              </div>
+              <div class="col-md-4">
+                <a href="#" class="filled-button">Purchase Now</a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="inner-content">
-              <p>Copyright &copy; 2020 Sixteen Clothing Co., Ltd.
-            
-            - Design: <a rel="nofollow noopener" href="#" target="_blank">TemplateMo</a></p>
-            </div>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="inner-content">
+            <p>Copyright &copy; 2020 Sixteen Clothing Co., Ltd.
+
+              - Design: <a rel="nofollow noopener" href="#" target="_blank">TemplateMo</a></p>
           </div>
         </div>
       </div>
-    </footer>
+    </div>
+  </footer>
 
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="{{asset('pro/js/jquery-3.6.1.min.js')}}"></script>
-    <script src="{{asset('pro/js/bootstrap.bundle.min.js')}}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{asset('pro/js/jquery-3.6.1.min.js')}}"></script>
+  <script src="{{asset('pro/js/bootstrap.bundle.min.js')}}"></script>
 
 
-    <!-- Additional Scripts -->
-    <script src="{{asset('assets/js/custom.js')}}"></script>
-    <script src="{{asset('assets/js/owl.js')}}"></script>
-    <script src="{{asset('assets/js/slick.js')}}"></script>
-    <script src="{{asset('assets/js/isotope.js')}}"></script>
-    <script src="{{asset('assets/js/accordions.js')}}"></script>
+  <!-- Additional Scripts -->
+  <script src="{{asset('assets/js/custom.js')}}"></script>
+  <script src="{{asset('assets/js/owl.js')}}"></script>
+  <script src="{{asset('assets/js/slick.js')}}"></script>
+  <script src="{{asset('assets/js/isotope.js')}}"></script>
+  <script src="{{asset('assets/js/accordions.js')}}"></script>
 
 
-    <script language = "text/Javascript"> 
-      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
-      function clearField(t){                   //declaring the array outside of the
-      if(! cleared[t.id]){                      // function makes it static and global
-          cleared[t.id] = 1;  // you could use true and false, but that's more typing
-          t.value='';         // with more chance of typos
-          t.style.color='#fff';
-          }
+  <script language="text/Javascript">
+    cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+    function clearField(t) { //declaring the array outside of the
+      if (!cleared[t.id]) { // function makes it static and global
+        cleared[t.id] = 1; // you could use true and false, but that's more typing
+        t.value = ''; // with more chance of typos
+        t.style.color = '#fff';
       }
-    </script>
+    }
+  </script>
 
 
-  </body>
+</body>
 
 </html>
-
-
-
-
-

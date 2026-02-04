@@ -12,16 +12,16 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
-
-
-
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+Route::group(['prefix' => LaravelLocalization::setLocale(),
+'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function()
+{
 // admin control users , product , catorries, oreders update
 Route::middleware('auth','admin')->group(function () {
 Route::get("/admin/dashboard",[DashboardController::class,'all'])->name('dashboard');
@@ -76,5 +76,6 @@ Route::get('cart/{id}',[CartController::class ,'delete']);
  Route::get('contact',[HomeController::class,'contact']);//->name('redirect');
 
  Route::get('payment/order',[PaymentController::class,'payment'])->name('payment.order');
+});
 require __DIR__.'/auth.php';
 require __DIR__.'/vendor.php'; 

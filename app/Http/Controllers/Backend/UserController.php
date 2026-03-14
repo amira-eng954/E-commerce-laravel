@@ -12,13 +12,15 @@ class UserController extends Controller
 {
     function index()
     {
-        $users=User::paginate(5);
+        $users=User::select('id','name','email','role')
+        ->orderBy('created_at','desc')
+        ->paginate(5);
         return view('admin.users.selectAll',compact("users"));
     }
     function show($id)
     {
         $data=User::find($id);
-        //var_dump($data);
+        
         return view('admin.users.show',["data"=>$data]);
     }
 

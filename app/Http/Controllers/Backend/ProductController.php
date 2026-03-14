@@ -10,6 +10,7 @@ use App\Http\Requests\ProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Notifications\ProductNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -18,16 +19,24 @@ class ProductController extends Controller
     use AuthorizesRequests;
     public function index()
     {
-      $products=Product::with(['user',"cat"])->paginate(5);
-   
+      // if(!Gate::allows('product.create')){
+      //   abort('403');
+      // }
+      $products=Product::with('user',"cat:id,namecat")
+      ->select('id','title','desc','qun','price', 'image', 'cat_id','user_id','status')
+      ->orderBy('created_at','desc')
+      ->paginate(5);
+      
       //dd($products);
     return view('admin.products.product',compact("products"));
 
+    
     }
 
     public function show($id)
     {
-        $data=Product::with('cat')->find($id);
+        $data=Product::with('cat:id,namecat')
+        ->select('id','title','desc','qun','price', 'image', 'cat_id','user_id','status')->find($id);
         return view('admin.products.show',['data'=>$data]);
     }
 

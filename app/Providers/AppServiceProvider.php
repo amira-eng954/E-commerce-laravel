@@ -3,6 +3,7 @@
 namespace App\Providers;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,6 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::define('product.create',function($user){
+                return false;
+        });
+        Gate::define('product.delete',function($user){
+            return false;
+        });
         //
         //paginator::
         // App::setLocale(request('locale','ar'));

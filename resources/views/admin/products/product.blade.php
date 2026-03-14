@@ -25,6 +25,7 @@
         <th>status</th>
         <th>iamge</th>
         <th>Category</th>
+        <th>User</th>
         <th>control</th>
       </tr>
 
@@ -35,19 +36,23 @@
            <td>{{$pro->desc}}</td>
            <td>{{$pro->qun}}</td>
             <td>{{$pro->price}}</td>
-           <td> <button class=" btn {{ $pro->status === 'active' ? 'btn-success' : 'btn-danger' }}">{{$pro->status}}</button></td>
+           <td> <button class=" badge {{ $pro->status === 'active' ? 'bg-success' : 'bg-danger' }}">{{$pro->status}}</button></td>
            <td><img src='{{asset("storage/$pro->image")}}' width="80px" height="80px"></td>
            <td>{{$pro->cat->namecat}}</td>
+           <td>{{$pro->user->name}}</td>
           
            <td>
             <a class='btn btn-success' href="{{route('product.show',$pro->id)}}"> show</a>
+        
             <a class='btn btn-info'  href="{{route('product.edit',$pro->id)}}"> edit</a>
-           
+          
+          
              <form action= "{{route('product.destroy',$pro->id)}}" method="post">
                 @csrf
                 @method('DELETE')
                 <button  class=' btn btn-danger'>delete</button>
                </form>
+              
            </td>
       </tr>
       @endforeach

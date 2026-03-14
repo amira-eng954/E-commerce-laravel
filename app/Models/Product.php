@@ -28,7 +28,7 @@ class Product extends Model
     }
      public function user()
     {
-        return $this->belongsTo(Cat::class);
+        return $this->belongsTo(User::class);
     }
 
     public function items()
